@@ -11,10 +11,10 @@ public class Main {
       student.setStudentName(scan.nextLine());
       
       System.out.println("Hello, " + student.getStudentName() + ". Now let's create a module.");
-      createSubject();
+      createModule();
       System.out.println("Great, here's what you've added: ");
       
-      Module.printSubjectArrl();
+      Module.printModuleArrl();
       
       boolean exit = false;
       int choice;
@@ -31,11 +31,11 @@ public class Main {
          choice = scan.nextInt();
          scan.nextLine();
          
-         if(choice==1){
-            createSubject();
-         }
-         if(choice==4){
-            Module.printSubjectArrl();}
+         if(choice==1){createModule();}
+         if(choice==2){editModule();}
+         if(choice==3){deleteModule();}
+         if(choice==4){Module.printModuleArrl();}
+         if(choice==5){/*Calculate grade to be completed*/}
          if(choice==6){
             System.out.println("WARNING: Nothing will be saved after exiting. Are you sure you want to exit? (y/n)");
             String answer = scan.nextLine();
@@ -52,21 +52,87 @@ public class Main {
       System.exit(0);
    }
    
-   public static Module createSubject(){
+   /**
+    * This function creates a new module and adds it to the list of other created modules
+    * @return a succesfully created module
+    */
+   public static Module createModule(){
       Module module = new Module();
       
       System.out.println("Module name:");
       module.setModuleName(scan.nextLine());
       
       System.out.println("Credits:");
-      module.setTotalCredits(scan.nextInt());
+      module.setCredits(scan.nextInt());
       
       System.out.println("Score:");
       module.setScore(scan.nextInt());
       
-      module.addToSubjectArrl(module);
+      module.addToModuleArrl(module);
       
       return module;
    }
    
+   /**
+    * This function deletes a selected module
+    */
+   public static void deleteModule(){
+      if(Module.moduleArrl.size() < 1){
+         System.out.println("There are no modules to delete!");
+         return;
+      }
+      
+      System.out.println("Here are the modules you've currently created");
+      Module.printModuleArrl();
+      System.out.println("Which one would you like to delete (enter the corresponding module number)");
+      int moduleToDelete = scan.nextInt();
+      Module.moduleArrl.remove(moduleToDelete-1);
+      System.out.println("Module " + moduleToDelete + " successfully deleted.");
+   }
+   
+   /**
+    * This function edits the details of a selected module
+    */
+   public static void editModule(){
+      if(Module.moduleArrl.size() < 1){
+         System.out.println("There are no modules to edit!");
+         return;
+      }
+      boolean valid = false;
+      while(valid == false){
+         System.out.println("Here are the modules you've currently created");
+         Module.printModuleArrl();
+         System.out.println("Which one would you like to edit (enter the corresponding module number)");
+         int moduleToEdit = scan.nextInt()-1;
+         System.out.println("What would you like to edit?" + "\n" +
+                 "1. Module name" + "\n" +
+                 "2. Credits" + "\n" +
+                 "3. Score");
+         int choice = scan.nextInt();
+         if(choice==1){
+            System.out.println("What would you like to change the name to?");
+            scan.nextLine();
+            String newModuleName = scan.nextLine();
+            Module.moduleArrl.get(moduleToEdit).setModuleName(newModuleName);
+            valid = true;
+         }
+         if(choice==2){
+            System.out.println("What would you like to change the credits to?");
+            scan.nextLine();
+            int newCredits = scan.nextInt();
+            Module.moduleArrl.get(moduleToEdit).setCredits(newCredits);
+            valid = true;
+         }
+         if(choice==3){
+            System.out.println("What would you like to change the score to?");
+            scan.nextLine();
+            int newScore = scan.nextInt();
+            Module.moduleArrl.get(moduleToEdit).setScore(newScore);
+            valid = true;
+         }
+         else{
+            System.out.println("Sorry, that's not an option.");
+         }
+      }
+   }
 }
