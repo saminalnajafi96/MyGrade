@@ -39,7 +39,7 @@ public class Main
                   if(choice == 2) {student.editModule();}
                   if(choice == 3) {student.deleteModule();}
                   if(choice == 4) {student.printModules();}
-                  if(choice == 5) {/*Calculate grade to be completed*/ calculateGrade();}
+                  if(choice == 5) {System.out.println("\n" + student.calculateGrade() + "\n");}
                   if(choice == 6)
                      {
                         System.out.println("WARNING: Nothing will be saved after exiting. Are you sure you want to exit? (y/n)");
@@ -59,15 +59,4 @@ public class Main
             System.out.println("Goodbye.");
             System.exit(0);
          }
-   
-      /**
-       * This function calculates the overall grade based off the modules
-       * @return overall grade
-       */
-      public static int calculateGrade(){
-         for(int i = 0; i < Module.moduleArrl.size();i++){
-            
-         }
-         return 0;
-      }
    }
