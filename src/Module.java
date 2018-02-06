@@ -175,6 +175,25 @@ public class Module
                   System.out.println("Sorry, that's not an option");
                }
          }
+   
+      /**
+       * This function calculates the overall grade based off the modules
+       * @return overall grade
+       */
+      public double calculateGrade(){
+         double multiplied = 0.0, currentCredits, currentScore;
+         for(int i = 0; i < moduleArrl.size();i++){
+            currentCredits = (double) moduleArrl.get(i).getCredits();
+            currentScore = (double) moduleArrl.get(i).getScore();
+            
+            multiplied += (currentCredits*currentScore);
+         }
+         
+         
+         multiplied = multiplied/(double) totalCredits;
+         
+         return multiplied;
+      }
       
       @Override
       public String toString(){
