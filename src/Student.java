@@ -1,7 +1,7 @@
 /**
  * Created by Samin on 03/02/2018.
  */
-public class Student
+public class Student extends Module
    {
       private String studentName;
       
